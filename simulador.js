@@ -7,6 +7,7 @@ let Apellido;
 let contador = 0;
 
 do{
+    
     variable = parseInt(prompt("1-Pedir un turno 2-Confirmar un turno 3-Mostrar turno 4-Tiempo estimado de llamada 5-Salir"))
 
     switch(variable){
