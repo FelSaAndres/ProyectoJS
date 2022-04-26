@@ -1,41 +1,54 @@
-
-let pasiente = null;
-let aprobado;
 let variable;
-let Nombre;
-let Apellido;
 let contador = 0;
+let listapacientes = []
+let persona;
+
+class Pasiente{
+
+    constructor(Nombre, Apellido, NumeroAsociado){
+        this.Nombre = Nombre
+        this.Apellido = Apellido
+        this.NumeroAsociado = NumeroAsociado
+        this.TurnoPendiente = false
+    }
+
+    EliminarTurno(){
+        let aux = prompt("Numero de asociado:")
+        for (let posicion in listapacientes) {
+            if (parseInt(posicion.NumeroAsociado) == parseInt(aux)) {
+                listapacientes.splice(parseInt(posicion), 0)
+            }
+        }
+    }
+
+}
 
 do{
     
-    variable = parseInt(prompt("1-Pedir un turno 2-Confirmar un turno 3-Mostrar turno 4-Tiempo estimado de llamada 5-Salir"))
+    variable = parseInt(prompt("1-Pedir un turno 2-Buscar sus datos 3-Mostrar turno 4-Tiempo estimado de llamada 5-Salir"))
 
     switch(variable){
     
         case 1:
-            pasiente = PedirTurno()
-            aprobado = false
+            persona = new Pasiente(prompt("Ingrese su nombre"),prompt("Ingrese su apellido"),prompt("Ingrese su numero de asociado"));
+            persona.TurnoPendiente = true
+            listapacientes.push(persona)
+            console.log(listapacientes)
             contador++
         break
         case 2:
-            if(pasiente != null){
-                ConfirmarTurno()
-                aprobado = true;
+            if(listapacientes.length > 0){
+                BuscarDatosPersonales()
             }
             else{
-                alert("Primero debe de pedir un turno")
+                alert("No se encontro ningun paciente, porfavor ingrese uno!!!")
             }
         break
         case 3:
-            if(aprobado){
-                MostrarDatosTurno()
-            }
-            else{
-                alert("Genere su turno primero o validelo")
-            }
+            persona.EliminarTurno()
         break
         case 4:
-            if(pasiente != null && aprobado == true){
+            if(pass != null && aprobado == true){
                 TiempoEsperaTurno()
             }
             else{
@@ -45,22 +58,16 @@ do{
 
 }while(variable != 5);
 
-function PedirTurno(){
-    Nombre = prompt("Ingrese su nombre: ")
-    Apellido = prompt("Ingrese su apellido: ")
-    NumeroOS = prompt("Ingrese su numero de obra social/prepaga: ")
-    return NumeroOS
-}
+/*function NuevoPaciente() {
+    let persona = new Pasiente(prompt("Ingrese su nombre"),prompt("Ingrese su apellido"),prompt("Ingrese su numero de asociado"));
+    persona.TurnoPendiente = true
+    listapacientes.push(persona)
+    console.log(listapacientes)
+}*/
 
-function ConfirmarTurno(){
-    alert("Su turno a sido generado con exito!!!")
-}
-
-function MostrarDatosTurno(){
-    alert("Datos del turno: " + Nombre + " " + Apellido + " " + pasiente)
-}
-
-function TiempoEsperaTurno(){
-    let tiempo = contador * 15
-    alert("El tiempo estimado para su turno es de: " + tiempo + "min")
+function BuscarDatosPersonales() {
+    let aux = prompt("Numero de asociado:")
+    let datos = listapacientes.find((x) => parseInt(x.NumeroAsociado) == parseInt(aux))
+    console.log(datos)
+    alert("Nombre: " + datos.Nombre + " Apellido: " + datos.Apellido)
 }
