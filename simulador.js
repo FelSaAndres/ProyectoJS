@@ -68,7 +68,7 @@ class Pasiente{
 
 do{
     
-    variable = parseInt(prompt("1-Pedir un turno 2-Buscar sus datos 3-Dar de baja turno 4-Tiempo estimado de llamada 5-Salir"))
+    variable = parseInt(prompt("1-Pedir un turno 2-Buscar sus datos 3-Dar de baja turno 4-Precio por turno 5-Salir"))
 
     switch(variable){
     
