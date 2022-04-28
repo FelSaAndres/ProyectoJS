@@ -25,10 +25,43 @@ class Pasiente{
         let datos = listapacientes.find((x) => parseInt(x.NumeroAsociado) == parseInt(aux))
         console.log(datos)
         if(datos != null){
-            alert("Nombre: " + datos.Nombre + " Apellido: " + datos.Apellido)
+            alert("Nombre: " + datos.Nombre + " Apellido: " + datos.Apellido + " Numero asociado: " + datos.NumeroAsociado)
         }
         else{
             alert("El pasiente buscado no existe")
+        }
+    }
+
+    FacturaHospital(){
+        let aux = prompt("Numero de asociado:")
+        if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(aux)))
+        {
+            let propTurno
+            do {
+                propTurno = parseInt(prompt("Proposito del turno: 1-Pediatria 2-Cardilogia 3-Cirujia General 4-Dermatologia 5-Oftalmologia"))
+            } while (propTurno < 0 || propTurno > 6); 
+            switch (propTurno) {
+                case 1:
+                    alert("Su factura medica es de: $5000")
+                    break;
+            
+                case 2:
+                    alert("Su factura medica es de: $10.000")
+                    break;
+    
+                case 3:
+                    alert("Su factura medica es de: $30.000")
+                    break;
+                case 4:
+                    alert("Su factura medica es de: $15.000")
+                    break;
+                case 5:
+                    alert("Su factura medica es de: $20.000")
+                    break;
+            }  
+        }
+        else{
+            alert("Numero de asociado no valido")
         }
     }
 }
@@ -60,7 +93,12 @@ do{
             }
         break
         case 4:
-            FacturaHospital()
+            if(listapacientes.length > 0){
+                persona.FacturaHospital()
+            }
+            else{
+                alert("No se encontro ningun paciente, porfavor ingrese uno!!!")
+            }
         break
     }
 
