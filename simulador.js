@@ -75,17 +75,6 @@ boton1.addEventListener('click', () =>{
     boton1.disabled = true
 })
 
-boton2.addEventListener('click', () =>{
-    let aux = new Pasiente()
-    let variable = prompt("Ingrese su numero de socio:")
-    if (listapacientes.some()) {
-        aux.Turno = true
-    }
-    else{
-        alert("El pasiente ya tiene un turno pendiente")
-    }
-})
-
 function ValidarNumeroAsociado(){
     let numAsociado = document.getElementById("numAsociado").value
     if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(numAsociado)))
