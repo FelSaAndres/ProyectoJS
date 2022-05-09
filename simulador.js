@@ -1,116 +1,97 @@
-let variable;
 let listapacientes = []
-let persona;
 
-class Pasiente{
-
-    constructor(Nombre, Apellido, NumeroAsociado){
-        this.Nombre = Nombre
-        this.Apellido = Apellido
-        this.NumeroAsociado = NumeroAsociado
-    }
-
-    EliminarTurno(){
-        let aux = prompt("Numero de asociado:")
-        for (let cont = 0; cont < listapacientes.length; cont++) {
-            if(parseInt(listapacientes[cont].NumeroAsociado) == parseInt(aux)){
-                listapacientes.splice(parseInt(cont), 1)
-            }
-        }
-        console.log(listapacientes)
-    }
-
-    BuscarDatosPersonales() {
-        let aux = prompt("Numero de asociado:")
-        let datos = listapacientes.find((x) => parseInt(x.NumeroAsociado) == parseInt(aux))
-        console.log(datos)
-        if(datos != null){
-            alert("Nombre: " + datos.Nombre + " Apellido: " + datos.Apellido + " Numero asociado: " + datos.NumeroAsociado)
-        }
-        else{
-            alert("El pasiente buscado no existe")
-        }
-    }
-
-    FacturaHospital(){
-        let aux = prompt("Numero de asociado:")
-        if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(aux)))
-        {
-            let propTurno
-            do {
-                propTurno = parseInt(prompt("Proposito del turno: 1-Pediatria 2-Cardilogia 3-Cirujia General 4-Dermatologia 5-Oftalmologia"))
-            } while (propTurno < 0 || propTurno > 6); 
-            switch (propTurno) {
-                case 1:
-                    alert("Su factura medica es de: $5000")
-                    break;
-            
-                case 2:
-                    alert("Su factura medica es de: $10.000")
-                    break;
-    
-                case 3:
-                    alert("Su factura medica es de: $30.000")
-                    break;
-                case 4:
-                    alert("Su factura medica es de: $15.000")
-                    break;
-                case 5:
-                    alert("Su factura medica es de: $20.000")
-                    break;
-            }  
-        }
-        else{
-            alert("Numero de asociado no valido")
-        }
+class SedesHospitales{
+    constructor(id, Localizacion, Areas, Horarios){
+        this.id = id
+        this.Localizacion = Localizacion
+        this.Areas = Areas
+        this.Horarios = Horarios
     }
 }
 
-do{
-    
-    variable = parseInt(prompt("1-Pedir un turno 2-Buscar sus datos 3-Dar de baja turno 4-Precio por turno 5-Salir"))
+const sede1 = new SedesHospitales(1, "Castelar", "Pediatraia, Dermatologia, Oftalmologia", "8:00hs a 18:00hs")
+const sede2 = new SedesHospitales(2, "Almagro", "Pediatraia, Cardiologia, Cirugia General", "10:00hs a 22:00hs")
+const sede3 = new SedesHospitales(3, "Centro", "Pediatraia, Angiologia, Ginecologia", "00:00hs a 12:00hs")
+const sede4 = new SedesHospitales(4, "Berazategui", "Pediatraia, Neurologia, Ortopedia", "15:00hs a 6:00hs")
 
-    switch(variable){
-    
-        case 1:
-            persona = new Pasiente(prompt("Ingrese su nombre"),prompt("Ingrese su apellido"), ValidarNumeroAsociado()); 
-            listapacientes.push(persona)
-        break
-        case 2:
-            if(listapacientes.length > 0){
-                persona.BuscarDatosPersonales()
-            }
-            else{
-                alert("No se encontro ningun paciente, porfavor ingrese uno!!!")
-            }
-        break
-        case 3:
-            if(listapacientes.length > 0){
-                persona.EliminarTurno()
-            }
-            else{
-                alert("No se encontro ningun paciente, porfavor ingrese uno!!!")
-            }
-        break
-        case 4:
-            if(listapacientes.length > 0){
-                persona.FacturaHospital()
-            }
-            else{
-                alert("No se encontro ningun paciente, porfavor ingrese uno!!!")
-            }
-        break
+let listasedes = [sede1, sede2, sede3, sede4]
+
+let apartadoSedes = document.getElementById("sedes")
+
+class Pasiente{
+
+    constructor(Nombre, Apellido, NumeroAsociado, Turno){
+        this.Nombre = Nombre
+        this.Apellido = Apellido
+        this.NumeroAsociado = NumeroAsociado
+        this.Turno = Turno
     }
 
-}while(variable != 5);
+}
 
+let pasiente;
+let boton = document.getElementById("aceptarTurno")
+let boton1 = document.getElementById("buscarSedes")
+let boton2 = document.getElementById("pediTurno")
+
+function buttonState()
+{
+    if (document.getElementById("nombre").value && document.getElementById("apellido").value && document.getElementById("numAsociado").value) {
+        document.getElementById("aceptarTurno").disabled = false
+    }
+    else{
+        document.getElementById("aceptarTurno").disabled = true
+    }
+}
+
+function Extras() {
+    document.getElementById("buscarSedes").disabled = false
+    document.getElementById("pediTurno").disabled = false
+    document.getElementById("eliminarTurno").disabled = false
+    document.getElementById("nombre").value = null
+    document.getElementById("apellido").value = null
+    document.getElementById("numAsociado").value = null
+}
+
+boton.addEventListener("click", () => {
+    pasiente = new Pasiente(document.getElementById("nombre").value, document.getElementById("apellido").value, ValidarNumeroAsociado(), null)
+    listapacientes.push(pasiente)
+    alert("Se a iniciado correctamente")
+    Extras()
+    console.log(listapacientes)
+})
+
+
+boton1.addEventListener('click', () =>{
+    listasedes.forEach(contsedes => {
+        apartadoSedes.innerHTML += `
+        <div id="sede${contsedes.id}" class="sedesCard">
+            <p class="titulo">${contsedes.Localizacion}</p>
+            <p>Areas: ${contsedes.Areas}</p>
+            <p>Horarios: ${contsedes.Horarios}</p>
+        </div>
+        `
+    })
+    boton1.disabled = true
+})
+
+boton2.addEventListener('click', () =>{
+    let aux = new Pasiente()
+    let variable = prompt("Ingrese su numero de socio:")
+    if (listapacientes.some()) {
+        aux.Turno = true
+    }
+    else{
+        alert("El pasiente ya tiene un turno pendiente")
+    }
+})
 
 function ValidarNumeroAsociado(){
-    let numAsociado = prompt("Ingrese numero de asociado")
+    let numAsociado = document.getElementById("numAsociado").value
     if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(numAsociado)))
     {
-        alert("Ese numero de asociado ya existe, vuelva a ingresarlo")
-        numAsociado = ValidarNumeroAsociado()
+        alert("Numero de asociado ya existente")
+        throw new error('Ese numero de asociado ya existe');
     }
 
     return numAsociado

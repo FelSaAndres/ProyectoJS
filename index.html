@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Primera entrega proyecto final</title>
 </head>
 <body>
     <h1 style="text-align: center; color: black; font-size: 100px;">Sistema de turnos</h1>
+    <div class="formulario">
+        <input type="text" name="Nombre" id="nombre" placeholder="Nombre" onchange="buttonState()">
+        <input type="text" name="Apellido" id="apellido" placeholder="Apellido" onchange="buttonState()">
+        <input type="text" name="Numero" id="numAsociado" placeholder="Numero de asociado" onchange="buttonState()">
+        <button id="aceptarTurno" disabled>Ingresar datos</button>
+    </div>
+    
+    <div class="extras">
+        <button id="buscarSedes" disabled>Mostrar sedes</button>
+        <button id="pediTurno" disabled>Pedir turno</button>
+        <button id="eliminarTurno" disabled>Eliminar turno</button>
+    </div>
+
+    <div id="sedes"></div>
     
     <script src="simulador.js"></script>
 </body>
