@@ -1,4 +1,5 @@
-let listapacientes = []
+let listausuarios = []
+let usuario
 
 class SedesHospitales{
     constructor(id, Localizacion, Areas, Horarios){
@@ -18,15 +19,21 @@ let listasedes = [sede1, sede2, sede3, sede4]
 
 let apartadoSedes = document.getElementById("sedes")
 
-class Pasiente{
+class Registro{
 
-    constructor(Nombre, Apellido, NumeroAsociado, Turno){
+    constructor(Nombre, Apellido, NumeroAsociado, Contraseña){
         this.Nombre = Nombre
         this.Apellido = Apellido
         this.NumeroAsociado = NumeroAsociado
-        this.Turno = Turno
+        this.Contraseña = Contraseña
     }
+}
 
+class Usuario{
+    constructor(NumeroAsociado, Contraseña){
+        this.NumeroAsociado = NumeroAsociado
+        this.Contraseña = Contraseña
+    }
 }
 
 let pasiente;
@@ -34,7 +41,31 @@ let boton = document.getElementById("aceptarTurno")
 let boton1 = document.getElementById("buscarSedes")
 let boton2 = document.getElementById("pediTurno")
 
-function buttonState()
+let buttonIniciar = document.querySelector('#formularioInicio')
+let buttonRegistrar = document.querySelector('#formularioRegistro')
+
+buttonIniciar.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let usuario = new Usuario(document.querySelector("#numAsociado").value, document.querySelector("#IDpassword").value)
+    if (usuario != null) {
+        buttonIniciar.reset()
+        formState()
+    }
+})
+
+buttonRegistrar.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let usuarioRegistrado = new Registro(document.querySelector("#IDnombre").value, document.querySelector("#IDapellido").value, document.querySelector("#IDnumAsociado").value, document.querySelector("#IDpasswordR").value)
+    alert(usuarioRegistrado.NumeroAsociado)
+})
+
+function formState() {
+    document.querySelector("#IDpassword").disabled = true
+    document.querySelector("#numAsociado").disabled = true
+    document.querySelector("#aceptarTurno").disabled = true
+}
+
+/*function buttonState()
 {
     if (document.getElementById("nombre").value && document.getElementById("apellido").value && document.getElementById("numAsociado").value) {
         document.getElementById("aceptarTurno").disabled = false
@@ -53,12 +84,15 @@ function Extras() {
     document.getElementById("numAsociado").value = null
 }
 
-boton.addEventListener("click", () => {
-    pasiente = new Pasiente(document.getElementById("nombre").value, document.getElementById("apellido").value, ValidarNumeroAsociado(), null)
-    listapacientes.push(pasiente)
+boton.addEventListener("click", (e) => {
+    pasiente = new Pasiente(document.getElementById("nombre").value, document.getElementById("apellido").value, ValidarNumeroAsociado())
+    if(pasiente.NumeroAsociado == ""){alert("El numero de asociado ingresado ya existe")}
+    else{
+        listapacientes.push(pasiente)
     alert("Se a iniciado correctamente")
     Extras()
     console.log(listapacientes)
+    }
 })
 
 
@@ -79,9 +113,8 @@ function ValidarNumeroAsociado(){
     let numAsociado = document.getElementById("numAsociado").value
     if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(numAsociado)))
     {
-        alert("Numero de asociado ya existente")
-        throw new error('Ese numero de asociado ya existe');
+        numAsociado = ""
     }
 
     return numAsociado
-}
+}*/

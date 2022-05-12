@@ -7,7 +7,7 @@ body{
     background-image: url(https://thumbs.dreamstime.com/b/el-equipo-m%C3%A9dico-del-concepto-de-salud-y-medicina-hospital-en-168438273.jpg);
 }
 
-.formulario{
+#formularioInicio, #formularioRegistro{
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ body{
     gap: 20px;
 }
 
-.formulario input{
+#formularioInicio input, #formularioRegistro input{
     width: 250px;
     height: 35px;
 }
