@@ -5,6 +5,9 @@
 
 body{
     background-image: url(https://thumbs.dreamstime.com/b/el-equipo-m%C3%A9dico-del-concepto-de-salud-y-medicina-hospital-en-168438273.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 #formularioInicio, #formularioRegistro{
@@ -47,10 +50,10 @@ body{
 
 .sedesCard{
     margin: 20px;
-    width: 180px;
-    height: 150px;
+    width: 210px;
+    height: 180px;
     text-align: center;
-    border-radius: 40px;
+    border-radius: 20px;
     border: solid black 2px;
     background-color: rgb(201, 142, 124);
 }
@@ -58,4 +61,25 @@ body{
 .sedesCard .titulo{
     font-size: 25px;
     font-weight: bolder;
+}
+
+#datos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#plantilla{
+    margin: 20px;
+    padding: 5px;
+    width: 280px;
+    height: 160px;
+    font-weight: bolder;
+    color: black;
+    border: solid black 2px;
+    background-color: rgb(236, 226, 226);
+}
+
+#plantilla h2{
+    text-align: center;
 }

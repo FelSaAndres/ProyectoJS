@@ -33,7 +33,7 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Registrarme
                       </button>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" id="IDcerrarsecion">
                         Cerrar secion
                       </button>
                 </span>
@@ -46,7 +46,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Registrate Gratis!!!</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -86,16 +86,16 @@
         </div>
 
         <button type="submit" id="aceptarTurno">Iniciar secion</button>
-
     </form>
     
     
     <div class="extras">
-        <button id="buscarSedes" disabled>Mostrar sedes</button>
+        <button id="buscarSedes">Mostrar sedes</button>
         <button id="pediTurno" disabled>Pedir turno</button>
-        <button id="eliminarTurno" disabled>Eliminar turno</button>
+        <button id="buscarDatos" disabled>Mostrar Datos</button>
     </div>
 
+    <div id="datos"></div>
     <div id="sedes"></div>
     
     <script src="simulador.js"></script>
