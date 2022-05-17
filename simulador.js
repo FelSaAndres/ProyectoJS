@@ -36,6 +36,7 @@ let pasiente;
 let boton = document.querySelector("#pediTurno")
 let boton1 = document.querySelector("#buscarSedes")
 let boton2 = document.querySelector("#buscarDatos")
+let botonClose = document.querySelector('#close')
 
 let buttonIniciar = document.querySelector('#formularioInicio')
 let buttonRegistrar = document.querySelector('#formularioRegistro')
@@ -61,9 +62,20 @@ buttonIniciar.addEventListener('submit', (e) => {
 buttonRegistrar.addEventListener('submit', (e) => {
     e.preventDefault()
     let usuarioRegistrado = new Registro(document.querySelector("#IDnombre").value, document.querySelector("#IDapellido").value, document.querySelector("#IDnumAsociado").value, document.querySelector("#IDpasswordR").value, "NO")
-    listausuarios.push(usuarioRegistrado)
-    buttonRegistrar.reset()
-    alert('Te as registrado con exito')
+    let cond = true
+    listausuarios.forEach(auxuser =>{
+        if (auxuser.NumeroAsociado == usuarioRegistrado.NumeroAsociado) {
+            cond = false
+        }
+    })
+    if (cond) {
+        listausuarios.push(usuarioRegistrado)
+        buttonRegistrar.reset()
+        alert('Te as registrado con exito')
+    }
+    else{
+        alert("Numero de asociado ya existente")
+    }
 })
 
 buttonCerrarSecion.addEventListener('click', () =>{
@@ -101,37 +113,6 @@ function formState() {
         document.querySelector("#buscarDatos").disabled = true
     }
 }
-
-/*function buttonState()
-{
-    if (document.getElementById("nombre").value && document.getElementById("apellido").value && document.getElementById("numAsociado").value) {
-        document.getElementById("aceptarTurno").disabled = false
-    }
-    else{
-        document.getElementById("aceptarTurno").disabled = true
-    }
-}
-
-function Extras() {
-    document.getElementById("buscarSedes").disabled = false
-    document.getElementById("pediTurno").disabled = false
-    document.getElementById("eliminarTurno").disabled = false
-    document.getElementById("nombre").value = null
-    document.getElementById("apellido").value = null
-    document.getElementById("numAsociado").value = null
-}
-
-boton.addEventListener("click", (e) => {
-    pasiente = new Pasiente(document.getElementById("nombre").value, document.getElementById("apellido").value, ValidarNumeroAsociado())
-    if(pasiente.NumeroAsociado == ""){alert("El numero de asociado ingresado ya existe")}
-    else{
-        listapacientes.push(pasiente)
-    alert("Se a iniciado correctamente")
-    Extras()
-    console.log(listapacientes)
-    }
-})*/
-
 
 boton1.addEventListener('click', () =>{
     listasedes.forEach(contsedes => {
@@ -171,12 +152,7 @@ boton2.addEventListener('click', () =>{
     `
 })
 
-function ValidarNumeroAsociado(){
-    let numAsociado = document.getElementById("numAsociado").value
-    if (listapacientes.some((x) => parseInt(x.NumeroAsociado) == parseInt(numAsociado)))
-    {
-        numAsociado = ""
-    }
+botonClose.addEventListener('click', () => {
+    buttonRegistrar.reset()
+})
 
-    return numAsociado
-}
