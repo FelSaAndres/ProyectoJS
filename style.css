@@ -83,3 +83,19 @@ body{
 #plantilla h2{
     text-align: center;
 }
+
+#CheckRecordar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 180px;
+    height: 30px;
+    margin-top: 0px;
+    font-weight: bolder;
+}
+
+#CheckRecordar input{
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+}

@@ -1,6 +1,7 @@
 let listausuarios = []
 let userIniciado
 let cont
+let userCheck
 
 class SedesHospitales{
     constructor(id, Localizacion, Areas, Horarios){
@@ -32,6 +33,22 @@ class Registro{
     }
 }
 
+let almacenado = JSON.parse(localStorage.getItem("iniciado"))
+if (almacenado) {
+    userIniciado = almacenado
+    Toastify({
+        text: "Bienvenido , " + userIniciado.Nombre,
+        duration: 2000,
+        newWindow: true,
+        gravity: "top", 
+        position: "right", 
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+      }).showToast();
+    formState()
+}
+
 let pasiente;
 let boton = document.querySelector("#pediTurno")
 let boton1 = document.querySelector("#buscarSedes")
@@ -46,12 +63,33 @@ buttonIniciar.addEventListener('submit', (e) => {
     e.preventDefault()
     if (listausuarios.some( (x) => parseInt(document.querySelector("#numAsociado").value) == parseInt(x.NumeroAsociado) && document.querySelector("#IDpassword").value == x.Contraseña)) {
         userIniciado = listausuarios.find( (x) => parseInt(document.querySelector("#numAsociado").value) == parseInt(x.NumeroAsociado))
-        alert("Bienvenido, " + userIniciado.Nombre)
+        if (document.getElementById("recordarSecion").checked) {
+            localStorage.setItem("iniciado", JSON.stringify(userIniciado))
+        }
+        Toastify({
+            text: "Bienvenido , " + userIniciado.Nombre,
+            duration: 2000,
+            newWindow: true,
+            gravity: "top", 
+            position: "right", 
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
         buttonIniciar.reset()
         formState()
     }
     else{
-        alert("Numero de asociado o contraseña incorrecta")
+        Toastify({
+            text: "Numero de asociado o contraseña incorrecta",
+            duration: 2000,
+            newWindow: true,
+            gravity: "top", 
+            position: "center", 
+            style: {
+              background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+            },
+          }).showToast();
     }
     if (usuario != null) {
         buttonIniciar.reset()
@@ -71,16 +109,25 @@ buttonRegistrar.addEventListener('submit', (e) => {
     if (cond) {
         listausuarios.push(usuarioRegistrado)
         buttonRegistrar.reset()
-        alert('Te as registrado con exito')
+        Swal.fire({
+            icon: 'success',
+            title: 'Increible',
+            text: 'Te as registrado con exito',
+          })
     }
     else{
-        alert("Numero de asociado ya existente")
+        Swal.fire({
+            icon: 'error',
+            title: 'Atencion!',
+            text: 'Numero de asociado ya existente',
+          })
     }
 })
 
 buttonCerrarSecion.addEventListener('click', () =>{
     if (userIniciado != null) {
         userIniciado = null
+        localStorage.removeItem("iniciado")
         formState()
         if (cont == 1) {
             for (let index = 1; index < 5; index++) {
@@ -93,7 +140,16 @@ buttonCerrarSecion.addEventListener('click', () =>{
         document.getElementById("buscarSedes").disabled = false
     }
     else{
-        alert("No hay una secion iniciada anteriormente")
+        Toastify({
+            text: "Inicie secion primero",
+            duration: 2000,
+            newWindow: true,
+            gravity: "top", 
+            position: "left", 
+            style: {
+                background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+            },
+          }).showToast();
     }
 })
 
@@ -102,6 +158,7 @@ function formState() {
         document.querySelector("#IDpassword").disabled = true
         document.querySelector("#numAsociado").disabled = true
         document.querySelector("#aceptarTurno").disabled = true
+        document.querySelector("#recordarSecion").disabled = true
         document.querySelector("#pediTurno").disabled = false
         document.querySelector("#buscarDatos").disabled = false
     }
@@ -109,6 +166,7 @@ function formState() {
         document.querySelector("#IDpassword").disabled = false
         document.querySelector("#numAsociado").disabled = false
         document.querySelector("#aceptarTurno").disabled = false
+        document.querySelector("#recordarSecion").disabled = false
         document.querySelector("#pediTurno").disabled = true
         document.querySelector("#buscarDatos").disabled = true
     }
@@ -133,12 +191,30 @@ boton.addEventListener('click', () => {
         listausuarios.forEach(user => {
             if (user.numAsociado == userIniciado.numAsociado) {
                 user.Turno = "SI"
-                alert("El turno fue validado")
+                Toastify({
+                    text: "El turno fue validado",
+                    duration: 2000,
+                    newWindow: true,
+                    gravity: "top", 
+                    position: "center", 
+                    style: {
+                      background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    },
+                  }).showToast();
             }
         })
     }
     else{
-        alert("El pasiente cuenta con un turno vigente")
+        Toastify({
+            text: "El pasiente cuenta con un turno vigente",
+            duration: 2000,
+            newWindow: true,
+            gravity: "top", 
+            position: "center", 
+            style: {
+                background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+            },
+          }).showToast();
     }
 })
 
