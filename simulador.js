@@ -173,7 +173,20 @@ function formState() {
 }
 
 boton1.addEventListener('click', () =>{
-    listasedes.forEach(contsedes => {
+    fetch('sedes.json')
+    .then((response) => response.json())
+    .then(sedes => {
+        sedes.forEach((cadasede) => {
+            apartadoSedes.innerHTML += `
+            <div id="sede${cadasede.id}" class="sedesCard">
+            <p class="titulo">${cadasede.Localizacion}</p>
+            <p>Areas: ${cadasede.Areas}</p>
+            <p>Horarios: ${cadasede.Horarios}</p>
+        </div>
+            `
+        })
+    })
+    /*listasedes.forEach(contsedes => {
         apartadoSedes.innerHTML += `
         <div id="sede${contsedes.id}" class="sedesCard">
             <p class="titulo">${contsedes.Localizacion}</p>
@@ -181,7 +194,7 @@ boton1.addEventListener('click', () =>{
             <p>Horarios: ${contsedes.Horarios}</p>
         </div>
         `
-    })
+    })*/
     cont = 1
     boton1.disabled = true
 })

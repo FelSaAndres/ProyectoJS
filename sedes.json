@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "Localizacion": "Castelar",
+        "Areas": "Pediatraia, Dermatologia, Oftalmologia",
+        "Horarios": "8:00hs a 18:00hs"
+    },
+    {
+        "id": 2,
+        "Localizacion": "Almagro",
+        "Areas": "Pediatraia, Cardiologia, Cirugia General",
+        "Horarios": "10:00hs a 22:00hs"
+    },
+    {
+        "id": 3,
+        "Localizacion": "Centro",
+        "Areas": "Pediatraia, Angiologia, Ginecologia",
+        "Horarios": "00:00hs a 12:00hs"
+    },
+    {
+        "id": 4,
+        "Localizacion": "Berazategui",
+        "Areas": "Pediatraia, Neurologia, Ortopedia",
+        "Horarios": "15:00hs a 6:00hs"
+    }
+]
