@@ -3,22 +3,6 @@ let userIniciado
 let cont
 let userCheck
 
-class SedesHospitales{
-    constructor(id, Localizacion, Areas, Horarios){
-        this.id = id
-        this.Localizacion = Localizacion
-        this.Areas = Areas
-        this.Horarios = Horarios
-    }
-}
-
-const sede1 = new SedesHospitales(1, "Castelar", "Pediatraia, Dermatologia, Oftalmologia", "8:00hs a 18:00hs")
-const sede2 = new SedesHospitales(2, "Almagro", "Pediatraia, Cardiologia, Cirugia General", "10:00hs a 22:00hs")
-const sede3 = new SedesHospitales(3, "Centro", "Pediatraia, Angiologia, Ginecologia", "00:00hs a 12:00hs")
-const sede4 = new SedesHospitales(4, "Berazategui", "Pediatraia, Neurologia, Ortopedia", "15:00hs a 6:00hs")
-
-let listasedes = [sede1, sede2, sede3, sede4]
-
 let apartadoSedes = document.querySelector("#sedes")
 let datosPersonales = document.querySelector("#datos")
 
@@ -175,7 +159,6 @@ function formState() {
 boton1.addEventListener('click', () =>{
     fetch('hospitales.json')
     .then(response => response.json())
-    .then(data => console.log(data))
     .then(sedes => {
         sedes.forEach((cadasede) => {
             apartadoSedes.innerHTML += `
